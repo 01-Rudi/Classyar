@@ -1,0 +1,52 @@
+% ============================================================
+%  preamble.tex — تنظیمات مشترک اسناد LaTeX (کامپایل با XeLaTeX)
+% ============================================================
+\usepackage{xcolor}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\setlist{nosep, leftmargin=*}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{calc}
+\usepackage{ragged2e}
+\usepackage{fancyhdr}
+\usepackage{etoolbox}
+\usepackage{footnote}
+
+% ---------- لازمهٔ جدول‌های خروجی pandoc ----------
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+\makesavenoteenv{longtable}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% ---------- ظاهر ----------
+\definecolor{primary}{RGB}{31, 78, 121}
+\definecolor{accent}{RGB}{0, 150, 136}
+\titleformat{\section}{\Large\bfseries\color{primary}}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{1em}{}
+\renewcommand{\arraystretch}{1.3}
+\linespread{1.3}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\setlength{\headheight}{14pt}
+
+% ---------- hyperref قبل از xepersian ----------
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=primary, urlcolor=primary, citecolor=primary}
+
+% ---------- فارسی‌سازی (آخرین بسته) ----------
+\usepackage{xepersian}
+\settextfont{Tahoma}
+\setlatintextfont{Times New Roman}
+\setdigitfont{Tahoma}
+
+% ---------- شمارندهٔ لازم برای جدول‌های pandoc (LTcaptype = none) ----------
+\newcounter{none}

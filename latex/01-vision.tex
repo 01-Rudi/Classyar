@@ -1,0 +1,574 @@
+\documentclass[12pt, a4paper]{article}
+\input{preamble}
+\fancyhead[R]{\small سند چشم‌انداز — کلاس‌یار}
+\fancyhead[L]{\small نسخهٔ ۱.۰}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{3cm}
+{\Huge\bfseries سند چشم‌انداز\par}
+\vspace{0.5cm}
+{\LARGE\bfseries پروژهٔ کلاس‌یار\par}
+\vspace{0.5cm}
+{\large پلتفرم اشتراک جزوه، نمونه‌سؤال و ارزیابی استادان\par}
+\vspace{2cm}
+{\large تهیه‌کنندگان:\par}
+{\large مریم قندی زنجانی، ملیکا شهبازی، آنیسا فروغمند، مائده رضایی، محمدمهدی ذوالقدر\par}
+\vspace{0.5cm}
+{\large دانشگاه آزاد زنجان\par}
+\vspace{1cm}
+{\large ۱۴۰۵/۰۷/۱۱\par}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{نام پروژه} & کلاس‌یار (ClassYar) — پلتفرم اشتراک جزوه، نمونه‌سؤال و ارزیابی استادان \\
+\textbf{نسخهٔ سند} & 1.0 \\
+\textbf{تاریخ} & ۱۴۰۵/۰۷/۱۱ \\
+\textbf{تهیه‌کنندگان} & {[}مریم قندی زنجانی، ملیکا شهبازی،آنیسا فروغمند، مائده رضایی، محمدمهدی ذوالقدر{]} \\
+\textbf{وضعیت} & پیش‌نویس \\
+\textbf{آخرین به‌روزرسانی} & ۱۴۰۵/۰۷/۱۱ \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{مقدمه}
+
+\subsection{هدف سند}
+
+این سند چشم‌انداز، دامنه و ذی‌نفعان پروژهٔ \textbf{کلاس‌یار} را تعریف می‌کند.
+هدف آن ایجاد یک درک مشترک میان تیم توسعه، کاربران و ذی‌نفعان درباره
+«چه چیزی می‌سازیم، برای چه کسی، و چرا» است.
+
+این سند \textbf{قرارداد رسمی} نیست، بلکه \textbf{مرجع راهنما} برای تصمیم‌گیری‌های
+بعدی در طول چرخهٔ حیات پروژه است و در هر Sprint بازبینی می‌شود.
+
+\subsection{دامنهٔ سند}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{در دامنه:} اهداف محصول، کاربران هدف، محدودهٔ MVP، معیارهای موفقیت،
+  ریسک‌های سطح بالا.
+\item
+  \textbf{خارج از دامنه:} جزئیات فنی، طراحی UI، نیازمندی‌های دقیق functional (که
+  در SRS می‌آید).
+\end{itemize}
+
+\subsection{تعاریف و اصطلاحات}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+اصطلاح
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+تعریف
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{MVP} & Minimum Viable Product — کمینهٔ محصول قابل ارائه \\
+\textbf{User Story} & توصیف نیازمندی از دید کاربر \\
+\textbf{Persona} & نمایندهٔ فرضی کاربر هدف \\
+\textbf{Sprint} & بازهٔ کوتاه توسعه (۲-۳ هفته) در Scrum \\
+\textbf{DoD} & Definition of Done — معیار «تمام‌شده» بودن کار \\
+\textbf{جزوه} & هر فایل آموزشی دانشجویی مانند جزوهٔ دست‌نویس اسکن‌شده، تایپ‌شده یا خلاصهٔ درس \\
+\textbf{واحد دانشگاهی} & شعبه یا دانشکدهٔ مشخص یک دانشگاه (مثلاً دانشگاه آزاد، واحد زنجان) \\
+\textbf{نمرهٔ تشویقی} & امتیاز یا نمرهٔ اضافه‌ای که استاد برای مشارکت مفید دانشجو ثبت می‌کند \\
+\textbf{MoSCoW} & روش اولویت‌بندی: Must، Should، Could، Won\textquotesingle t \\
+\end{longtable}
+}
+
+\subsection{مراجع}
+
+\begin{itemize}
+\tightlist
+\item
+  IEEE 830 — Recommended Practice for Software Requirements Specifications
+\item
+  Roman Pichler — \emph{Product Vision Board}
+\item
+  Scrum Guide (2020)
+\item
+  Sommerville — \emph{Software Engineering}, Chapter 1-2
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{چشم‌انداز محصول}
+
+\subsection{بیانیهٔ چشم‌انداز (Vision Statement)}
+
+\begin{quote}
+\textbf{برای} دانشجویانی \textbf{که} برای پیدا کردن جزوه، نمونه‌سؤال و اطلاعات مطمئن
+دربارهٔ استادان خود بین گروه‌های پیام‌رسان و فایل‌های پراکنده سرگردان‌اند،
+\textbf{کلاس‌یار} یک \textbf{پلتفرم وب دانشجویی} است
+\textbf{که} اشتراک جزوه، جست‌وجو بر پایهٔ استاد، استان و واحد دانشگاهی،
+امتیازدهی و گفت‌وگو را در یک جا فراهم می‌کند.
+
+\textbf{برخلاف} گروه‌های تلگرام و ایتا که محتوا در آن‌ها گم می‌شود و کیفیتش
+مشخص نیست، \textbf{محصول ما} محتوا را بر پایهٔ استاد و درس سازمان می‌دهد و با
+امتیاز دانشجویان و تأیید استادان قابل‌اعتماد می‌کند.
+\end{quote}
+
+\subsection{ارزش پیشنهادی (Value Proposition)}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.4615}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5385}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+برای
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+ارزش
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{دانشجوی استفاده‌کننده} & پیدا کردن سریع جزوه و نمونه‌سؤال استاد موردنظر، با دیدن امتیاز و نظر دیگران قبل از دانلود \\
+\textbf{دانشجوی مشارکت‌کننده} & اشتراک جزوه، دریافت بازخورد و امکان گرفتن نمرهٔ تشویقی از استاد \\
+\textbf{استاد} & دیدن منابع دانشجویی مربوط به درس خود، تأیید جزوه‌های خوب و تشویق مشارکت‌کنندگان \\
+\textbf{مدیر سامانه} & کنترل محتوا و کاربران و حفظ اعتبار پلتفرم \\
+\end{longtable}
+}
+
+\subsection{مزیت رقابتی}
+
+\begin{itemize}
+\tightlist
+\item
+  تمرکز: همه‌چیز بر پایهٔ «استاد + درس + واحد دانشگاهی» سازمان می‌یابد، نه یک انبار فایل
+\item
+  اعتماد: امتیاز دانشجویان و تأیید استاد، کیفیت جزوه را نشان می‌دهد
+\item
+  انگیزه: استاد می‌تواند برای مشارکت مفید نمرهٔ تشویقی در نظر بگیرد
+\item
+  ارتباط: نظرها، لینک گروه‌های کلاسی و نمونه‌سؤال‌ها در کنار هم هستند
+\item
+  سادگی: فارسی، راست‌به‌چپ و بدون پیچیدگی
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{مشکل و فرصت}
+
+\subsection{مشکل فعلی (Problem Statement)}
+
+دانشجویان و استادان با چالش‌های زیر روبه‌رو هستند:
+1. \textbf{پراکندگی منابع:} جزوه و نمونه‌سؤال در گروه‌های پیام‌رسان و حافظهٔ شخصی افراد پخش است.
+2. \textbf{سخت‌بودن پیدا کردن:} نمی‌توان جزوهٔ یک استاد مشخص در یک واحد دانشگاهی مشخص را فیلتر کرد.
+3. \textbf{نبود معیار کیفیت:} دانشجو نمی‌داند کدام جزوه کامل و قابل‌اعتماد است.
+4. \textbf{نبود اطلاعات دربارهٔ استاد:} نظر و تجربهٔ دانشجویان قبلی در دسترس نیست.
+5. \textbf{نبود انگیزه برای اشتراک:} دانشجویی که جزوهٔ کامل دارد دلیلی برای به‌اشتراک‌گذاشتن آن ندارد.
+6. \textbf{نبود ارتباط استاد با منابع دانشجویی:} استاد نمی‌داند دانشجویان از چه منابعی استفاده می‌کنند.
+
+\subsection{فرصت (Opportunity)}
+
+\begin{itemize}
+\tightlist
+\item
+  نیاز مشترک میان دانشجویان همهٔ دانشگاه‌ها و رشته‌ها
+\item
+  امکان ساخت یک مخزن مشترک و قابل‌جست‌وجو از جزوه‌های واقعی
+\item
+  امکان ایجاد انگیزه با نمرهٔ تشویقی و امتیازدهی
+\item
+  ضعف گروه‌های پیام‌رسان در سازمان‌دهی محتوا
+\item
+  امکان توسعه به همهٔ استان‌ها و دانشگاه‌های کشور
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{کاربران هدف و ذی‌نفعان}
+
+\subsection{ذی‌نفعان (Stakeholders)}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3810}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2857}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+ذی‌نفع
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+نقش
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+علاقه
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+دانشجوی استفاده‌کننده & جست‌وجو، دانلود، امتیاز و نظر & پیدا کردن سریع منبع باکیفیت \\
+دانشجوی مشارکت‌کننده & آپلود جزوه و نمونه‌سؤال & دیده‌شدن، بازخورد و نمرهٔ تشویقی \\
+استاد & تأیید جزوه، نمرهٔ تشویقی، مشاهدهٔ نظرات & منابع درست برای درس خود و تشویق دانشجویان \\
+مدیر سامانه & مدیریت کاربران، اطلاعات پایه و گزارش‌ها & نظم، اعتبار و امنیت پلتفرم \\
+تیم توسعه & سازندهٔ محصول & تحویل به‌موقع، یادگیری \\
+استاد درس & ناظر پروژه & رعایت اصول مهندسی \\
+\end{longtable}
+}
+
+\subsection{پرسوناهای کلیدی}
+
+جزئیات کامل در \texttt{docs/02-requirements/personas.md}. خلاصه:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2857}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2143}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+پرسونا
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+نقش
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+ویژگی کلیدی
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{نگار} & دانشجوی استفاده‌کننده & ۲۰ ساله، وقت کم و نیازمند جزوهٔ مطمئن \\
+\textbf{امیرحسین} & دانشجوی مشارکت‌کننده & ۲۲ ساله، جزوه‌های منظم دارد و دنبال انگیزه است \\
+\textbf{دکتر کاظمی} & استاد & ۴۶ ساله، مهارت فنی متوسط، دنبال تشویق دانشجویان فعال \\
+\textbf{خانم نوروزی} & مدیر سامانه & ۲۶ ساله، مسئول انجمن علمی، نمایندهٔ مشتری \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{محدودهٔ محصول}
+
+\subsection{داخل محدوده (In Scope — MVP)}
+
+\textbf{کاربری (Functional):}
+- \textbf{F-01} ثبت‌نام و ورود با نقش دانشجو یا استاد
+- \textbf{F-02} مدیریت اطلاعات پایه (استان، دانشگاه، واحد، درس، استاد) توسط مدیر؛ دانشجو می‌تواند افزودن استاد را درخواست دهد
+- \textbf{F-03} آپلود جزوه با مشخصات (استاد، درس، استان، واحد، ترم، توضیح)
+- \textbf{F-04} جست‌وجو و فیلتر بر پایهٔ استاد، استان، واحد دانشگاهی، درس و ترم
+- \textbf{F-05} صفحهٔ جزئیات جزوه و دانلود فایل
+- \textbf{F-06} امتیازدهی ۱ تا ۵ به جزوه و نمایش میانگین
+- \textbf{F-07} صفحهٔ استاد: جزوه‌ها، نمونه‌سؤال‌ها، لینک گروه‌ها و میانگین امتیاز
+- \textbf{F-08} امتیازدهی دانشجو به استاد
+- \textbf{F-09} نظرها روی جزوه و صفحهٔ استاد، همراه با امکان پاسخ
+- \textbf{F-10} ثبت و نمایش لینک گروه‌های کلاسی و نمونه‌سؤال‌ها
+- \textbf{F-11} تأیید جزوه و ثبت نمرهٔ تشویقی توسط استاد
+- \textbf{F-12} گزارش محتوای نامناسب یا ناقض حقوق دیگران
+- \textbf{F-13} پنل مدیر: کاربران، گزارش‌ها و حذف محتوا
+
+\textbf{غیرکاربری (Non-functional):}
+- \textbf{NF-01} زمان بارگذاری صفحه \textless{} ۲ ثانیه
+- \textbf{NF-02} پشتیبانی از ۱۰۰ کاربر همزمان
+- \textbf{NF-03} رابط کاربری واکنش‌گرا (Responsive) برای موبایل و دسکتاپ
+- \textbf{NF-04} رمزنگاری گذرواژه‌ها (bcrypt)
+- \textbf{NF-05} پشتیبانی از زبان فارسی و RTL
+- \textbf{NF-06} اعتبارسنجی فایل‌ها (فقط PDF، JPG، PNG و DOCX، حداکثر ۲۰ مگابایت)
+- \textbf{NF-07} کنترل دسترسی بر پایهٔ نقش (دانشجو، استاد، مدیر)
+- \textbf{NF-08} هر کاربر برای هر جزوه و هر استاد فقط یک امتیاز بتواند ثبت کند
+
+\subsection{خارج از محدوده (Out of Scope)}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.4615}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5385}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+مورد
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+دلیل
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+ثبت نمرهٔ رسمی در سامانهٔ دانشگاه & نمرهٔ تشویقی فقط در کلاس‌یار ثبت می‌شود و اتصال به سامانهٔ آموزشی خارج از توان یک ترم است \\
+اپلیکیشن موبایل & تمرکز روی وب \\
+چت زنده بین کاربران & نظرها و پاسخ‌ها کافی است \\
+فروش جزوه و پرداخت & خارج از هدف پروژه \\
+تشخیص خودکار سرقت یا کپی‌رایت & پیچیدگی فنی؛ فقط گزارش دستی \\
+تبدیل جزوهٔ دست‌نویس به متن (OCR) & خارج از توان یک ترم \\
+احراز هویت با سامانهٔ دانشگاه & نیاز به مجوز؛ فقط ایمیل و تأیید دستی استاد \\
+چند زبانه (فارسی/انگلیسی) & تمرکز روی فارسی \\
+\end{longtable}
+}
+
+\subsection{محدودیت‌ها (Constraints)}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{زمانی:} ۱۴ هفته، ۳ Sprint
+\item
+  \textbf{تیمی:} ۳-۵ نفر
+\item
+  \textbf{فنی:} بدون سرور اختصاصی، استقرار روی سرویس ابری رایگان
+\item
+  \textbf{بودجه:} صفر (فقط ابزارهای رایگان)
+\item
+  \textbf{محتوایی:} مسئولیت محتوای بارگذاری‌شده با کاربر است و باید قوانین استفاده تعریف شود
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{معیارهای موفقیت (Success Metrics)}
+
+\subsection{معیارهای کاربری}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2059}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1765}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.6176}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+معیار
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+هدف
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+نحوهٔ اندازه‌گیری
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+زمان پیدا کردن جزوهٔ یک استاد مشخص & \textless{} ۲ دقیقه & تست کاربری \\
+زمان آپلود یک جزوه & \textless{} ۳ دقیقه & تست کاربری \\
+موفقیت در ثبت امتیاز و نظر & \textgreater{} ۹۰٪ کاربران آزمایشی & تست کاربری \\
+رضایت کاربر & \textgreater{} ۸۰٪ & نظرسنجی ساده \\
+\end{longtable}
+}
+
+\subsection{معیارهای فنی}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+معیار & هدف \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+پوشش تست (Code Coverage) & \textgreater{} ۷۰٪ \\
+تعداد باگ بحرانی در انتشار & صفر \\
+زمان Build در CI & \textless{} ۵ دقیقه \\
+موفقیت Deploy & ۱۰۰٪ \\
+صحت کنترل دسترسی نقش‌ها & ۱۰۰٪ سناریوهای اصلی \\
+\end{longtable}
+}
+
+\subsection{معیارهای فرآیندی}
+
+\begin{itemize}
+\tightlist
+\item
+  تحویل هر Sprint به‌موقع
+\item
+  رعایت Definition of Done در هر Story
+\item
+  مستندات به‌روز در پایان هر Sprint
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{ریسک‌های سطح بالا}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1818}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2424}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1515}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.4242}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+ریسک
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+احتمال
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+اثر
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+راهکار کاهش
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+تغییر نیازمندی‌ها در میانهٔ پروژه & بالا & متوسط & Sprintهای کوتاه، Backlog منعطف \\
+کمبود زمان به‌دلیل وسعت پروژه & بالا & بالا & MVP کوچک، اولویت MoSCoW؛ F-10 و F-11 اول حذف می‌شوند \\
+Scope Creep & بالا & بالا & مرزبندی دقیق MVP، تأیید استاد \\
+نظرهای توهین‌آمیز یا ناعادلانه دربارهٔ استادان & متوسط & بالا & گزارش محتوا، امکان پاسخ استاد، قوانین استفاده، حذف توسط مدیر \\
+آپلود محتوای دارای حق مالکیت دیگران & متوسط & بالا & تعهد آپلودکننده، گزارش و حذف سریع، قوانین سامانه \\
+امتیازدهی تقلبی با حساب‌های متعدد & متوسط & متوسط & یک امتیاز برای هر کاربر، تأیید ایمیل \\
+مشارکت‌نکردن استادان در ابتدا & بالا & متوسط & سامانه بدون مشارکت استاد هم کار می‌کند؛ استاد فقط ارزش اضافه می‌دهد \\
+ضعف فنی تیم در بخشی & متوسط & متوسط & منتورینگ استاد، تقسیم کار \\
+از دست دادن داده & کم & بالا & Backup خودکار، Git \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{رویکرد و متدولوژی}
+
+\subsection{متدولوژی}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Scrum سبک‌شده:} ۳ Sprint دو-سه هفته‌ای
+\item
+  \textbf{ابزار مدیریت:} GitHub Projects
+\item
+  \textbf{جلسات:} Sprint Planning، Daily (کوتاه، آنلاین)، Review، Retrospective
+\end{itemize}
+
+\subsection{فناوری پیشنهادی}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.4286}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5714}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+لایه
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+فناوری
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Backend & Node.js + Express \\
+Frontend & React \\
+Database & PostgreSQL \\
+ORM & Prisma \\
+ذخیرهٔ فایل & دیسک سرور یا سرویس ذخیرهٔ ابری رایگان \\
+Version Control & Git + GitHub \\
+CI/CD & GitHub Actions \\
+مستندسازی & Markdown در GitHub \\
+\end{longtable}
+}
+
+\begin{quote}
+دلیل انتخاب: یک زبان (JavaScript) برای کل تیم، ابزارهای رایگان و مستندات فراوان،
+و پایگاه دادهٔ رابطه‌ای برای ارتباط‌های استاد، درس، واحد و جزوه.
+\end{quote}
+
+\subsection{Definition of Done}
+
+یک Story وقتی «تمام» است که:
+1. کد نوشته و Merge شده باشد.
+2. تست Unit برای آن نوشته شده باشد.
+3. Code Review شده باشد.
+4. مستندات مربوطه به‌روز شده باشد.
+5. در محیط Demo کار کند.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{نقشهٔ راه (Roadmap)}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2759}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2069}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2414}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2759}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Sprint
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+بازه
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+تمرکز
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+خروجی
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Sprint 1 & هفته ۱-۵ & پایه و کشف & ثبت‌نام و ورود، اطلاعات پایه، آپلود جزوه، فهرست و جزئیات جزوه (F-01 تا F-05) \\
+Sprint 2 & هفته ۶-۱۱ & ارزیابی و تعامل & فیلتر کامل، امتیاز جزوه، صفحهٔ استاد، امتیاز استاد، نظرها (F-04 تا F-09) \\
+Sprint 3 & هفته ۱۲-۱۴ & استاد، کیفیت و انتشار & لینک گروه و نمونه‌سؤال، تأیید و نمرهٔ تشویقی، گزارش و پنل مدیر، تست، CI/CD، Demo Day (F-10 تا F-13) \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{تأیید و تصویب}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2308}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2308}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2692}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2692}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+نقش
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+نام
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+تاریخ
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+امضا
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+صاحب محصول & دکترابراهیم فضلی (استاد درس) & {[}۱۴۰۵/۰۷/۱۱{]} & \\
+مشتری فرضی & خانم نوروزی & {[}۱۴۰۵/۰۷/۱۱{]} & \\
+نمایندهٔ تیم & {[}مریم قندی زنجانی{]} & {[}تاریخ{]} & \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section*{پیوست الف — تاریخچهٔ تغییرات}\addcontentsline{toc}{section}{پیوست الف — تاریخچهٔ تغییرات}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1842}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1842}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2632}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3684}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+نسخه
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+تاریخ
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+تغییرات
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+تهیه‌کنندگان
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1.0 & ۱۴۰۵/۰۷/۱۱ & نسخهٔ اولیه & {[}مریم قندی زنجانی، ملیکا شهبازی،آنیسا فروغمند، مائده رضایی، محمدمهدی ذوالقدر{]} \\
+\end{longtable}
+}
+
+\end{document}

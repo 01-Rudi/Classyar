@@ -1,0 +1,202 @@
+\documentclass[12pt, a4paper]{article}
+\input{preamble}
+\fancyhead[R]{\small داستان‌های کاربر — کلاس‌یار}
+\fancyhead[L]{\small نسخهٔ ۱.۰}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{3cm}
+{\Huge\bfseries داستان‌های کاربر\par}
+\vspace{0.5cm}
+{\LARGE\bfseries پروژهٔ کلاس‌یار\par}
+\vspace{0.5cm}
+{\large پلتفرم اشتراک جزوه، نمونه‌سؤال و ارزیابی استادان\par}
+\vspace{2cm}
+{\large تهیه‌کنندگان:\par}
+{\large مریم قندی زنجانی، ملیکا شهبازی، آنیسا فروغمند، مائده رضایی، محمدمهدی ذوالقدر\par}
+\vspace{0.5cm}
+{\large دانشگاه آزاد زنجان\par}
+\vspace{1cm}
+{\large ۱۴۰۵/۰۷/۱۱\par}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{نسخهٔ سند} & ۱.۰ \\
+\textbf{وضعیت} & پیش‌نویس — ۱۰ Story اولیه \\
+\textbf{مرجع} & \texttt{docs/01-vision.md} و \texttt{docs/02-requirements/personas.md} \\
+\end{longtable}
+}
+
+\textbf{قالب:} به‌عنوان {[}نقش{]} می‌خواهم {[}هدف{]} تا {[}ارزش{]}.
+\textbf{اولویت:} MoSCoW (Must / Should / Could). \textbf{ارتباط:} شمارهٔ قابلیت در سند چشم‌انداز.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.0690}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1149}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.5747}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.0805}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.0690}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.0920}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+شناسه
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+نقش
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+داستان
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+اولویت
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Sprint
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+قابلیت
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+US-01 & دانشجو / استاد & به‌عنوان کاربر جدید می‌خواهم ثبت‌نام کنم و وارد شوم تا از امکانات مخصوص نقشم استفاده کنم & Must & 1 & F-01 \\
+US-02 & امیرحسین & به‌عنوان دانشجوی مشارکت‌کننده می‌خواهم جزوه‌ام را با مشخصات استاد، درس، واحد و ترم آپلود کنم تا دیگران پیدایش کنند & Must & 1 & F-03 \\
+US-03 & نگار & به‌عنوان دانشجو می‌خواهم جزوه‌ها را بر پایهٔ استاد، استان، واحد و درس فیلتر کنم تا سریع جزوهٔ موردنظرم را بیابم & Must & 1-2 & F-04 \\
+US-04 & نگار & به‌عنوان دانشجو می‌خواهم جزئیات جزوه را ببینم و آن را دانلود کنم تا قبل از مطالعه از مناسب‌بودنش مطمئن شوم & Must & 1 & F-05 \\
+US-05 & نگار & به‌عنوان دانشجو می‌خواهم به جزوه امتیاز بدهم و نظر بنویسم تا بقیه کیفیتش را بدانند & Must & 2 & F-06, F-09 \\
+US-06 & نگار & به‌عنوان دانشجو می‌خواهم صفحهٔ هر استاد را ببینم و به او امتیاز بدهم تا دانشجویان بعدی او را بهتر بشناسند & Should & 2 & F-07, F-08 \\
+US-07 & نگار & به‌عنوان دانشجو می‌خواهم نمونه‌سؤال‌ها و لینک گروه کلاس هر استاد را ببینم تا بهتر آماده شوم & Should & 3 & F-10 \\
+US-08 & دکتر کاظمی & به‌عنوان استاد می‌خواهم جزوه‌های درسم را تأیید کنم و برای آپلودکننده نمرهٔ تشویقی ثبت کنم تا دانشجویان فعال تشویق شوند & Could & 3 & F-11 \\
+US-09 & خانم نوروزی & به‌عنوان مدیر می‌خواهم گزارش‌های محتوای نامناسب را ببینم و آن را حذف یا رد کنم تا اعتبار سامانه حفظ شود & Must & 3 & F-12, F-13 \\
+US-10 & خانم نوروزی & به‌عنوان مدیر می‌خواهم استان، دانشگاه، واحد، درس و استاد را تعریف و درخواست‌های افزودن را تأیید کنم تا فیلترها درست کار کنند & Must & 1 & F-02 \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{معیارهای پذیرش (Acceptance Criteria)}
+
+\subsection{US-01 — ثبت‌نام و ورود}
+
+\begin{itemize}
+\tightlist
+\item
+  کاربر با ایمیل، گذرواژه و انتخاب نقش (دانشجو یا استاد) ثبت‌نام می‌کند.
+\item
+  گذرواژه با bcrypt ذخیره می‌شود و گذرواژهٔ کمتر از ۸ کاراکتر پذیرفته نمی‌شود.
+\item
+  حساب استاد پس از تأیید مدیر فعال می‌شود.
+\end{itemize}
+
+\subsection{US-02 — آپلود جزوه}
+
+\begin{itemize}
+\tightlist
+\item
+  انتخاب استاد، درس، استان، واحد و ترم اجباری است و توضیح اختیاری.
+\item
+  فقط PDF، JPG، PNG و DOCX تا ۲۰ مگابایت پذیرفته می‌شود.
+\item
+  پس از آپلود، جزوه در فهرست آپلودکننده دیده می‌شود.
+\end{itemize}
+
+\subsection{US-03 — جست‌وجو و فیلتر}
+
+\begin{itemize}
+\tightlist
+\item
+  ترکیب چند فیلتر (استاد + استان + واحد) درست کار می‌کند.
+\item
+  نتیجه کمتر از ۲ ثانیه نمایش داده می‌شود.
+\item
+  اگر نتیجه‌ای نبود، پیام «جزوه‌ای یافت نشد» نمایش داده می‌شود.
+\end{itemize}
+
+\subsection{US-04 — جزئیات و دانلود}
+
+\begin{itemize}
+\tightlist
+\item
+  عنوان، استاد، درس، ترم، آپلودکننده، میانگین امتیاز و تعداد دانلود نمایش داده می‌شود.
+\item
+  دکمهٔ دانلود فایل اصلی را بدون خطا می‌دهد.
+\end{itemize}
+
+\subsection{US-05 — امتیاز و نظر}
+
+\begin{itemize}
+\tightlist
+\item
+  امتیاز بین ۱ تا ۵ است و هر کاربر برای هر جزوه فقط یک بار می‌تواند امتیاز بدهد.
+\item
+  میانگین امتیاز بلافاصله به‌روز می‌شود.
+\item
+  نظر خالی ثبت نمی‌شود و دیگران می‌توانند زیر آن پاسخ بدهند.
+\end{itemize}
+
+\subsection{US-06 — صفحهٔ استاد و امتیاز به استاد}
+
+\begin{itemize}
+\tightlist
+\item
+  صفحهٔ استاد جزوه‌ها، میانگین امتیاز و نظرها را نشان می‌دهد.
+\item
+  هر دانشجو برای هر استاد فقط یک امتیاز ثبت می‌کند و می‌تواند آن را ویرایش کند.
+\end{itemize}
+
+\subsection{US-07 — نمونه‌سؤال و لینک گروه}
+
+\begin{itemize}
+\tightlist
+\item
+  دانشجو می‌تواند نمونه‌سؤال (فایل) یا لینک گروه کلاس را برای یک استاد و درس ثبت کند.
+\item
+  لینک‌ها فقط با ساختار معتبر (https) ذخیره می‌شوند.
+\end{itemize}
+
+\subsection{US-08 — تأیید و نمرهٔ تشویقی}
+
+\begin{itemize}
+\tightlist
+\item
+  استاد فقط جزوه‌های مربوط به خودش را می‌بیند و تأیید می‌کند.
+\item
+  نمرهٔ تشویقی همراه یادداشت کوتاه ثبت می‌شود و آپلودکننده آن را در پروفایلش می‌بیند.
+\item
+  سامانه صریحاً نشان می‌دهد که این نمره رسمی نیست و فقط تشویقی است.
+\end{itemize}
+
+\subsection{US-09 — گزارش و بررسی}
+
+\begin{itemize}
+\tightlist
+\item
+  هر کاربر می‌تواند جزوه یا نظر را با ذکر دلیل گزارش کند.
+\item
+  مدیر فهرست گزارش‌ها را می‌بیند و محتوا را حذف یا گزارش را رد می‌کند.
+\item
+  وضعیت گزارش (جدید، بررسی‌شده، رد‌شده) ثبت می‌شود.
+\end{itemize}
+
+\subsection{US-10 — اطلاعات پایه}
+
+\begin{itemize}
+\tightlist
+\item
+  مدیر استان، دانشگاه، واحد، درس و استاد را اضافه، ویرایش و حذف می‌کند.
+\item
+  درخواست دانشجو برای افزودن استاد در پنل مدیر دیده و تأیید یا رد می‌شود.
+\item
+  حذف مورد دارای جزوه مجاز نیست و پیام خطا می‌دهد.
+\end{itemize}
+
+\end{document}
