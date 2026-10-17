@@ -26,7 +26,7 @@ docs/                       مستندات
   01-vision.md              سند چشم‌انداز
   02-requirements/
     personas.md             پرسوناها
-    user-stories.md         ۱۰ داستان کاربر اولیه
+    user-stories.md         ۱۵ داستان کاربر با معیار پذیرش
 latex/                      نسخهٔ LaTeX اسناد (PDF در latex/output)
 slides/session-01/          اسلایدهای معرفی پروژه (Marp)
 templates/                  قالب‌های رسمی درس
