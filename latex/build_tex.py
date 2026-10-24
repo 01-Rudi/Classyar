@@ -14,13 +14,15 @@ DOCS = [
      "سند پرسوناها", "پروژهٔ کلاس‌یار", "سند پرسوناها — کلاس‌یار"),
     ("docs/02-requirements/user-stories.md", "latex/user-stories.tex",
      "داستان‌های کاربر", "پروژهٔ کلاس‌یار", "داستان‌های کاربر — کلاس‌یار"),
+    ("docs/03-design/architecture.md", "latex/architecture.tex",
+     "سند معماری", "پروژهٔ کلاس‌یار", "سند معماری — کلاس‌یار"),
 ]
 
 # صفحهٔ عنوان بدون tabular: \maketitle با xepersian در LaTeX جدید خطا می‌دهد
 HEAD = r"""\documentclass[12pt, a4paper]{article}
 \input{preamble}
 \fancyhead[R]{\small %(header)s}
-\fancyhead[L]{\small نسخهٔ ۱.۰}
+\fancyhead[L]{\small نسخهٔ \lr{۱.۰}}
 
 \begin{document}
 
@@ -60,6 +62,11 @@ def prepare(md: str) -> str:
 
 def finish(tex: str) -> str:
     tex = tex.replace("---", "—").replace("--", "–")   # خط تیرهٔ یونیکد
+    # بلوک‌های کد (نمودار، JSON) باید چپ‌به‌راست چاپ شوند
+    tex = tex.replace("\\begin{verbatim}", "\\begin{LTR}\n\\begin{verbatim}")
+    tex = tex.replace("\\end{verbatim}", "\\end{verbatim}\n\\end{LTR}")
+    # شمارهٔ نسخه مثل ۱.۱ در متن فارسی برعکس نشود
+    tex = re.sub(r"(?<![\\\w{])([۰-۹]+\.[۰-۹]+)", r"\\lr{\1}", tex)
     # پیوست‌ها بدون شماره ولی در فهرست مطالب
     return re.sub(
         r"\\section\{(پیوست[^}]*)\}",
@@ -69,7 +76,8 @@ for src, dst, title, sub, header in DOCS:
     md = (ROOT / src).read_text(encoding="utf-8")
     body = subprocess.run(
         ["pandoc", "-f", "markdown-smart-auto_identifiers", "-t", "latex",
-         "--wrap=preserve", "--columns=50", "--shift-heading-level-by=-1"],
+         "--wrap=preserve", "--columns=50", "--shift-heading-level-by=-1",
+         "--no-highlight"],
                 input=prepare(md), capture_output=True, text=True,
         encoding="utf-8", check=True).stdout
     (ROOT / dst).write_text(

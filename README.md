@@ -27,6 +27,9 @@ docs/                       مستندات
   02-requirements/
     personas.md             پرسوناها
     user-stories.md         ۱۵ داستان کاربر با معیار پذیرش
+  03-design/
+    architecture.md         سند معماری
+    uml/                    Use Case Diagram و مشخصات (Mermaid)
 latex/                      نسخهٔ LaTeX اسناد (PDF در latex/output)
 slides/session-01/          اسلایدهای معرفی پروژه (Marp)
 templates/                  قالب‌های رسمی درس

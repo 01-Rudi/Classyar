@@ -8,7 +8,10 @@
 - [داستان‌های کاربر](02-requirements/user-stories.md)
 
 ### ۲. طراحی
-- [معماری](03-design/architecture.md) — *به‌زودی*
+- [معماری](03-design/architecture.md)
+- [Use Case Diagram](03-design/uml/use-case.md)
+- [مشخصات Use Caseها](03-design/uml/use-case-specification.md)
+- [فهرست دیاگرام‌های UML](03-design/uml/README.md)
 
 ### ۳. تست
 - [طرح تست](04-testing/test-plan.md) — *به‌زودی*

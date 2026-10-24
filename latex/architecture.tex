@@ -1,0 +1,583 @@
+\documentclass[12pt, a4paper]{article}
+\input{preamble}
+\fancyhead[R]{\small سند معماری — کلاس‌یار}
+\fancyhead[L]{\small نسخهٔ \lr{۱.۰}}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{3cm}
+{\Huge\bfseries سند معماری\par}
+\vspace{0.5cm}
+{\LARGE\bfseries پروژهٔ کلاس‌یار\par}
+\vspace{0.5cm}
+{\large پلتفرم اشتراک جزوه، نمونه‌سؤال و ارزیابی استادان\par}
+\vspace{2cm}
+{\large تهیه‌کنندگان:\par}
+{\large مریم قندی زنجانی، ملیکا شهبازی، آنیسا فروغمند، مائده رضایی، محمدمهدی ذوالقدر\par}
+\vspace{0.5cm}
+{\large دانشگاه آزاد زنجان\par}
+\vspace{1cm}
+{\large ۱۴۰۵/۰۷/۱۱\par}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{نام پروژه} & کلاس‌یار (ClassYar) \\
+\textbf{نسخهٔ سند} & \lr{۱.۱} \\
+\textbf{تاریخ} & ۱۴۰۵/۰۸/۰۲ \\
+\textbf{تهیه‌کنندگان} & مریم قندی زنجانی، ملیکا شهبازی، آنیسا فروغمند، مائده رضایی، محمدمهدی ذوالقدر \\
+\textbf{وضعیت} & پیش‌نویس \\
+\textbf{مرجع} & \texttt{docs/01-vision.md} (بخش \lr{۸.۲}) و \texttt{docs/02-requirements/user-stories.md} \\
+\end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{مقدمه}
+
+\subsection{هدف سند}
+
+این سند معماری نرم‌افزار پروژهٔ \textbf{کلاس‌یار} را تعریف می‌کند.
+هدف آن ایجاد یک درک مشترک از ساختار سیستم، تصمیم‌های کلیدی و
+محدودیت‌ها است.
+
+\subsection{دامنه}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{در دامنه:} معماری سطح بالا، لایه‌ها، Endpointها، امنیت.
+\item
+  \textbf{خارج از دامنه:} جزئیات پیاده‌سازی، کد.
+\end{itemize}
+
+\subsection{ذی‌نفعان}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5714}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4286}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+ذی‌نفع
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+نقش
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+تیم توسعه (۵ نفر) & پیاده‌سازی \\
+استاد درس & ارزیابی \\
+کاربران هدف (دانشجو، استاد، مدیر) & استفاده و تأیید \\
+\end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{نمای کلی معماری}
+
+\subsection{سبک معماری}
+
+\textbf{Monolith + Layered Architecture}
+
+\begin{itemize}
+\tightlist
+\item
+  یک برنامهٔ واحد
+\item
+  سه لایهٔ اصلی: Presentation، Business، Data
+\item
+  مناسب تیم کوچک (۵ نفر) و پروژهٔ ۱۴ هفته‌ای
+\item
+  ساده برای شروع، قابل گسترش
+\end{itemize}
+
+\subsection{دیاگرام لایه‌ها}
+
+\begin{LTR}
+\begin{verbatim}
++——————————————+
+|  Presentation Layer                      |
+|  React (SPA)                             |
++———————+——————–+
+                      | HTTP / REST (JSON)
++———————v——————–+
+|  Business Layer                          |
+|  Node.js + Express                       |
++———————+——————–+
+                      | Prisma (SQL)
++———————v——————–+
+|  Data Layer                              |
+|  PostgreSQL + File Storage               |
++——————————————+
+\end{verbatim}
+\end{LTR}
+
+\subsection{جریان داده}
+
+کاربر ← مرورگر (React) ← API (Express) ← پایگاه داده (PostgreSQL) و ذخیرهٔ فایل
+
+درخواست از کاربر به Frontend، سپس به API و در پایان به پایگاه داده می‌رسد؛ پاسخ همین مسیر را برمی‌گردد.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{لایه‌ها}
+
+\subsection{Presentation Layer (Frontend)}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+مورد & انتخاب \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+فناوری & React 18 \\
+Routing & React Router \\
+State & Redux Toolkit \\
+UI & Tailwind CSS (با پشتیبانی RTL) \\
+Build & Vite \\
+\end{longtable}
+
+\subsection{Business Layer (Backend)}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+مورد & انتخاب \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+فناوری & Node.js 20 + Express 4 \\
+ORM & Prisma \\
+Validation & Zod \\
+Auth & JWT \\
+Logging & Winston \\
+آپلود فایل & Multer \\
+\end{longtable}
+
+\subsection{Data Layer (Database و فایل)}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+مورد & انتخاب \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+فناوری & PostgreSQL 16 \\
+Migration & Prisma Migrate \\
+ذخیرهٔ فایل & دیسک سرور (MVP)، سپس سرویس ابری \\
+Backup & روزانه \\
+Hosting & Railway \\
+\end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{تصمیم‌های معماری (ADR)}
+
+\subsection{ADR-01: چرا Monolith؟}
+
+\textbf{تصمیم:} معماری Monolith
+
+\textbf{دلیل:}
+- تیم کوچک (۵ نفر) و زمان محدود (۱۴ هفته)
+- پیچیدگی کم و یک زبان (JavaScript) برای کل تیم
+- سرعت توسعه بالاتر
+- استقرار ساده
+
+\subsection{ADR-02: چرا React؟}
+
+\textbf{تصمیم:} React برای Frontend
+
+\textbf{دلیل:}
+- محبوب و مستند
+- اکوسیستم بزرگ
+- SPA برای تجربهٔ کاربری بهتر در جست‌وجو و فیلتر
+
+\subsection{ADR-03: چرا PostgreSQL؟}
+
+\textbf{تصمیم:} PostgreSQL برای Database
+
+\textbf{دلیل:}
+- رابطه‌های استاد، درس، واحد و جزوه رابطه‌ای هستند
+- قیدهای یکتایی (یک امتیاز برای هر کاربر) به‌سادگی اعمال می‌شود
+- رایگان و اوپن‌سورس
+
+\subsection{ADR-04: ذخیرهٔ فایل جزوه‌ها}
+
+\textbf{تصمیم:} فایل‌ها روی دیسک سرور ذخیره می‌شوند و مسیر آن‌ها در PostgreSQL می‌ماند. دسترسی از طریق یک لایهٔ جداگانه (Storage Service) است.
+
+\textbf{دلیل:}
+- ساده‌ترین راه برای MVP
+- با جداسازی لایه، گذر به سرویس ابری بدون تغییر در بقیهٔ کد ممکن است
+- محدودیت: فضای دیسک (حداکثر ۲۰ مگابایت برای هر فایل)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{REST API}
+
+همهٔ مسیرها با \texttt{/api} شروع می‌شوند. جست‌وجو و فیلتر با پارامترهای Query روی \texttt{GET\ /notes} انجام می‌شود
+(\texttt{professorId}، \texttt{provinceId}، \texttt{unitId}، \texttt{courseId}، \texttt{term}، \texttt{page}).
+
+\subsection{احراز هویت}
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+Method & Endpoint & توضیح & Story \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+POST & /auth/register & ثبت‌نام & US-01 \\
+POST & /auth/login & ورود & US-01 \\
+POST & /auth/refresh & تمدید توکن & US-01 \\
+\end{longtable}
+
+\subsection{جزوه‌ها}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3125}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2188}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2188}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Method
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Endpoint
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+توضیح
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Story
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+GET & /notes & فهرست و فیلتر جزوه‌ها & US-04، US-07 \\
+GET & /notes/:id & جزئیات جزوه & US-05 \\
+GET & /notes/:id/download & دانلود فایل & US-05 \\
+POST & /notes & آپلود جزوه & US-03 \\
+PUT & /notes/:id & ویرایش جزوهٔ خود & US-06 \\
+DELETE & /notes/:id & حذف جزوهٔ خود & US-06 \\
+GET & /me/notes & جزوه‌های من & US-06 \\
+\end{longtable}
+
+\subsection{استادان و اطلاعات پایه}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3125}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2188}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2188}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Method
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Endpoint
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+توضیح
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Story
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+GET & /professors & فهرست استادان & US-10 \\
+GET & /professors/:id & صفحهٔ استاد & US-10 \\
+POST & /professor-requests & درخواست افزودن استاد & US-02 \\
+GET & /provinces، /universities، /units، /courses & فهرست اطلاعات پایه برای فیلترها & US-07 \\
+\end{longtable}
+
+\subsection{امتیاز، نظر و منابع}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3125}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2188}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2188}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Method
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Endpoint
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+توضیح
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Story
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+POST & /notes/:id/rating & ثبت یا ویرایش امتیاز جزوه & US-08 \\
+POST & /professors/:id/rating & ثبت یا ویرایش امتیاز استاد & US-11 \\
+GET & /notes/:id/comments & نظرهای جزوه & US-09 \\
+POST & /notes/:id/comments & ثبت نظر برای جزوه & US-09 \\
+GET & /professors/:id/comments & نظرهای استاد & US-09 \\
+POST & /professors/:id/comments & ثبت نظر برای استاد & US-09 \\
+POST & /comments/:id/replies & پاسخ به نظر & US-09 \\
+GET & /professors/:id/resources & نمونه‌سؤال‌ها و لینک گروه‌ها & US-12 \\
+POST & /professors/:id/resources & ثبت نمونه‌سؤال یا لینک گروه & US-12 \\
+POST & /reports & گزارش جزوه یا نظر نامناسب & US-14 \\
+\end{longtable}
+
+\subsection{Endpointهای استاد}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3125}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2188}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2188}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Method
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Endpoint
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+توضیح
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Story
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+GET & /professor/notes & جزوه‌های مربوط به درس‌های استاد & US-13 \\
+POST & /professor/notes/:id/approve & تأیید جزوه & US-13 \\
+POST & /professor/notes/:id/bonus & ثبت نمرهٔ تشویقی & US-13 \\
+\end{longtable}
+
+\subsection{Endpointهای ادمین}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3125}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2188}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2188}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Method
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Endpoint
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+توضیح
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Story
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+GET & /admin/reports & فهرست گزارش‌ها & US-15 \\
+PUT & /admin/reports/:id & بررسی یا رد گزارش & US-15 \\
+DELETE & /admin/notes/:id & حذف جزوهٔ نامناسب & US-15 \\
+DELETE & /admin/comments/:id & حذف نظر نامناسب & US-15 \\
+GET & /admin/users & فهرست کاربران & US-01، US-15 \\
+PUT & /admin/users/:id & تأیید حساب استاد یا مسدودکردن & US-01، US-15 \\
+POST / PUT / DELETE & /admin/professors، /admin/provinces، /admin/universities، /admin/units، /admin/courses & مدیریت اطلاعات پایه & US-02 \\
+PUT & /admin/professor-requests/:id & تأیید یا رد درخواست افزودن استاد & US-02 \\
+\end{longtable}
+
+\subsection{نمونه Response}
+
+\texttt{GET\ /api/notes/1}
+
+\begin{LTR}
+\begin{verbatim}
+{
+  "id": 1,
+  "title": "Operations Research Notes",
+  "professor": "Dr. Kazemi",
+  "course": "Operations Research",
+  "university": "Zanjan Azad University",
+  "semester": 1,
+  "rating": 4,
+  "ratingCount": 12,
+  "downloads": 120
+}
+\end{verbatim}
+\end{LTR}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{امنیت}
+
+\subsection{احراز هویت}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{JWT} برای API
+\item
+  \textbf{bcrypt} برای رمزنگاری گذرواژه (حداقل ۸ کاراکتر)
+\item
+  \textbf{Refresh Token} برای تمدید
+\end{itemize}
+
+\subsection{مجوزدهی}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Role-Based Access Control (RBAC)}
+\item
+  نقش‌ها: Student، Professor، Admin (و مهمان بدون توکن برای مشاهده)
+\item
+  استاد فقط به جزوه‌های مربوط به درس خودش دسترسی دارد
+\item
+  حساب استاد پس از تأیید مدیر فعال می‌شود
+\end{itemize}
+
+\subsection{امنیت API}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{HTTPS} اجباری
+\item
+  \textbf{Rate Limiting} (۱۰۰ درخواست در دقیقه)
+\item
+  \textbf{CORS} محدود
+\item
+  \textbf{Input Validation} با Zod
+\end{itemize}
+
+\subsection{امنیت فایل و محتوا}
+
+\begin{itemize}
+\tightlist
+\item
+  فقط PDF، JPG، PNG و DOCX تا ۲۰ مگابایت؛ نوع فایل از محتوای آن بررسی می‌شود، نه فقط پسوند
+\item
+  نام فایل پاک‌سازی می‌شود و فایل خارج از مسیر عمومی ذخیره می‌شود
+\item
+  لینک گروه فقط با ساختار \texttt{https} ذخیره می‌شود
+\item
+  نظرها قبل از نمایش برای جلوگیری از XSS پاک‌سازی می‌شوند
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{مقیاس‌پذیری}
+
+\subsection{محدودیت‌های فعلی}
+
+\begin{itemize}
+\tightlist
+\item
+  Monolith ← مقیاس‌پذیری محدود
+\item
+  یک سرور ← تک نقطهٔ شکست
+\item
+  ذخیرهٔ فایل روی دیسک ← با رشد جزوه‌ها فضا کم می‌شود
+\item
+  هدف فعلی: ۱۰۰ کاربر همزمان (NF-02)
+\end{itemize}
+
+\subsection{مسیر رشد}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  فاز ۱ (MVP): Monolith + یک سرور + ذخیرهٔ فایل روی دیسک
+\item
+  فاز ۲: انتقال فایل‌ها به سرویس ذخیرهٔ ابری
+\item
+  فاز ۳: Load Balancer + چند سرور
+\item
+  فاز ۴: Database Replication و جدا کردن سرویس‌های پرمصرف
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{ریسک‌ها و بدهی فنی}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2143}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2857}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1786}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3214}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+ریسک
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+احتمال
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+اثر
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+راهکار
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+محتوای نامناسب یا ناقض حق مالکیت & بالا & بالا & قابلیت گزارش (F-12) و پنل مدیر (F-13) \\
+پرشدن فضای ذخیره‌سازی & متوسط & بالا & سقف ۲۰ مگابایت و انتقال به سرویس ابری \\
+امتیاز یا نظر جعلی & متوسط & متوسط & یک امتیاز برای هر کاربر، Rate Limiting \\
+نفوذ امنیتی & کم & بالا & OWASP و اعتبارسنجی ورودی و فایل \\
+از دست دادن داده & کم & بالا & Backup روزانه \\
+بدهی فنی & بالا & متوسط & Refactor در Sprint 3 \\
+\end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{فناوری‌ها}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+لایه & فناوری \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Frontend & React 18 + Vite + Tailwind \\
+Backend & Node.js 20 + Express 4 \\
+Database & PostgreSQL 16 \\
+ORM & Prisma \\
+Auth & JWT + bcrypt \\
+ذخیرهٔ فایل & دیسک سرور (MVP) \\
+Testing & Jest + Supertest \\
+CI/CD & GitHub Actions \\
+Deploy & Railway \\
+\end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section*{پیوست الف — تاریخچهٔ تغییرات}\addcontentsline{toc}{section}{پیوست الف — تاریخچهٔ تغییرات}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1842}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1842}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2632}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3684}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+نسخه
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+تاریخ
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+تغییرات
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+تهیه‌کننده
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\lr{۱.۰} & ۱۴۰۵/۰۷/۲۹ & نسخهٔ اولیه (مریم قندی زنجانی) & تیم کلاس‌یار \\
+\lr{۱.۱} & ۱۴۰۵/۰۸/۰۲ & اصلاح ساختار، Endpointها بر پایهٔ ۱۵ Story، ADR-04، ریسک‌ها و امنیت فایل & تیم کلاس‌یار \\
+\end{longtable}
+
+\end{document}
