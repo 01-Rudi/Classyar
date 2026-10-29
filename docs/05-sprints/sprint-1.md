@@ -48,7 +48,10 @@
 
 ### LaTeX + PDF
 
-- 
+- [01-vision.pdf](https://github.com/01-Rudi/Classyar/blob/main/latex/output/01-vision.pdf)
+- [architecture.pdf](https://github.com/01-Rudi/Classyar/blob/main/latex/output/architecture.pdf)
+- [personas.pdf](https://github.com/01-Rudi/Classyar/blob/main/latex/output/personas.pdf)
+- [user-stories.pdf](https://github.com/01-Rudi/Classyar/blob/main/latex/output/user-stories.pdf)
 
 ### پیاده‌سازی
 
