@@ -17,4 +17,4 @@
 - [طرح تست](04-testing/test-plan.md) — *به‌زودی*
 
 ### ۴. Sprintها
-- [Sprint 1](05-sprints/sprint-1.md) — *به‌زودی*
+- [Sprint 1](05-sprints/sprint-1.md) — [گزارش و برنامه‌ریزی]
